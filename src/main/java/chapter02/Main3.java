@@ -3,6 +3,7 @@ package chapter02;
 import java.util.Scanner;
 
 public class Main3 {
+	private static Assembler assembler = new Assembler();
 
 	public static void main(String[] args) {
 		Scanner scanf = new Scanner(System.in);
@@ -18,16 +19,65 @@ public class Main3 {
 				break;
 			}
 			if(command.startsWith("new")) {
-				processNewCommand(command.split(""));
+				processNewCommand(command.split(" "));
 				continue;
 			} else if(command.startsWith("change")) {
-				processChangeCommand(command.split(""));
+				processChangeCommand(command.split(" "));
 				continue;
 			}
 			printHelp();
 		}
 		
 		scanf.close();
+	}
+
+	private static void processChangeCommand(String[] arg) throws MemberNotFoundException{
+		if(arg.length != 4) {
+			printHelp();
+			return;
+		}
+		
+	try {
+		ChangePasswordService cps = assembler.getChangePasswordService();
+		
+		cps.ChangePasswordService(arg[1], arg[2], arg[3]);
+		
+		System.out.println("비밀번호가 변경되었습니다.\n");
+		
+		}catch(MemberNotFoundException e) {
+			System.out.println("일치하는 회원 정보가 없습니다.\n");
+		}catch(WrongIdPasswordException e) {
+			System.out.println("현재 비밀번호가 다릅니다.\n");
+		}
+	}
+
+	// 회원 가입 메서드 
+	private static void processNewCommand(String[] arg) throws WrongIdPasswordException{
+		if(arg.length != 5) {
+			printHelp();
+			return;
+		}
+		
+		RegisterRequest rr = new RegisterRequest();
+		rr.setEmail(arg[1]);
+		rr.setName(arg[2]);
+		rr.setPassword(arg[3]);
+		rr.setConfirmPassword(arg[4]);
+		
+		if(!rr.isPasswordEqualToConfirmPassword()) {
+			System.out.println("암호와 확인이 일치하지 않습니다.\n");
+			return ;
+		}
+		
+		try {
+			MemberRegisterService mrs = assembler.getMemberRegisterService();
+			
+			long id = mrs.regist(rr);
+			
+			System.out.println("아이디가"+id+"인 사용자가 등록되었습니다.");
+		}catch(DuplicateMemberException e) {
+			System.out.println("이미 존재하는 이메일입니다.\n");
+		}
 	}
 
 	private static void printHelp() {

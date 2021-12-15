@@ -7,7 +7,8 @@ public class ChangePasswordService {
 		this.memberDao = memberDao;
 	}
 	
-	public void ChangePasswordService(String email,String oldPW, String newPW) {
+	public void ChangePasswordService(String email,String oldPW, String newPW) 
+			throws MemberNotFoundException,WrongIdPasswordException{
 		//비밀번호를 변경할 회원 정보를 조회
 		Member member = memberDao.selectByEmail(email);
 		if(member == null) {
