@@ -1,4 +1,4 @@
-package chapter02;
+package chapter03;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 // 하나의 세터로 여러 개의 의존 객체를 주입하는게 아니라
 // 의존 객체 마다 세터를 만들어서 의존 주입을 하도록 해야함
 public class MemberInfoPrinter {
-	@Autowired
 	private MemberDao memberDao;
-	@Autowired
 	private MemberPrinter printer;
 	
 	public void printMemberInfo(String email) {
@@ -24,7 +22,8 @@ public class MemberInfoPrinter {
 	public MemberDao getMemberDao() {
 		return memberDao;
 	}
-
+	// 세터 메서드에 AutoWired 애노테이션을 붙임
+	@Autowired
 	public void setMemberDao(MemberDao memberDao) {
 		this.memberDao = memberDao;
 	}
@@ -32,7 +31,7 @@ public class MemberInfoPrinter {
 	public MemberPrinter getPrinter() {
 		return printer;
 	}
-
+	@Autowired
 	public void setPrinter(MemberPrinter printer) {
 		this.printer = printer;
 	}
