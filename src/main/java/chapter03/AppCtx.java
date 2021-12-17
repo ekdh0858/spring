@@ -1,5 +1,6 @@
 package chapter03;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,7 +27,14 @@ public class AppCtx {
 		return cps;
 	}
 	
+	// @Qualifier -> 이 애노테이션이 들어갈 수 있는 위치는 두 군데
+	// 두 군대 중 첫 번째 -> @Bean 애노테이션을 붙인 빈 생성 메서드
+	// 두 군데 중 두 번째 -> @Autowired 애노테이션을 붙인 멤버 변수 또는 메서드
+	// 
+	// 이 애노테이션을 사용하면 자동으로 의존을 주입할 대상 빈을 지정할 수 있음
+	// Qualifier -> 직역하면 한정자 / memberPrinter1에 printer 한정자를 붙였다 라고 표현
 	@Bean
+	@Qualifier("printer")
 	public MemberPrinter memberPrinter1() {
 		return new MemberPrinter();
 	}
