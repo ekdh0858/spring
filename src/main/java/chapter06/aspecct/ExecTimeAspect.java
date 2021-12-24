@@ -8,9 +8,11 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 
 // @Aspect 애노테이션을 적용한 클래스는 Advice, Pointcut을 반드시 함께 구현해야함
 @Aspect
+@Order(1) // Aspect순서를 지정해줌..-> 겉에 있는것?? 지정
 public class ExecTimeAspect {
 	
 	// 공통 기능을 적용할 대상 설정

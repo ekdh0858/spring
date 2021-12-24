@@ -6,6 +6,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import chapter06.Calculator;
 import chapter06.ImpCalculator1;
+import chapter06.aspecct.CacheAspect;
 import chapter06.aspecct.ExecTimeAspect;
 
 // @EnableAspectJAutoProxy -> @Aspect 애노테이션이 붙ㅌ은 공통 기능을
@@ -16,8 +17,14 @@ import chapter06.aspecct.ExecTimeAspect;
 // 클래스를 기반으로 프록시 객체를 만들고자 할 때는
 // @EnableAspectJAutoProxy 애노테이션에 proxyTargetclass = true 속성을 주면 됨
 
-@EnableAspectJAutoProxy(proxyTargetClass = true)
+@EnableAspectJAutoProxy //(proxyTargetClass = true)
 public class AppCtx {
+	
+	@Bean
+	public CacheAspect cacheAspect() {
+		return new CacheAspect();
+	}
+	
 	@Bean
 	public ExecTimeAspect execTimeAspect() {
 		return new ExecTimeAspect();
