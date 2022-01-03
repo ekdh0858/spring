@@ -41,7 +41,8 @@ public class MemberDao {
 //		return member;
 	}
 	
-	public void insert(Member member) {
+	
+	public long insert(Member member) {
 		
 		
 	//3번 할 때 주석처리	jdbcTemplate.update(sql,member.getEmail(),member.getPassword(),member.getName(),Timestamp.valueOf(member.getResisterDateTime()) );
@@ -90,9 +91,9 @@ public class MemberDao {
 		// Number 클래스는 래퍼 클래스의 하나
 		Number keyValue = keyholder.getKey();
 		
-		int id = keyValue.intValue();
+		long id = keyValue.longValue();
 		
-		System.out.println("회원 가입한 사용자의 식별 값 ID=>"+id);
+		return id;
 	}
 	public void update(Member member) {
 		// INSERT, UPDATE, DELETE 쿼리를 실행할 때는 update 메서드를 호출해야함
@@ -144,5 +145,13 @@ public class MemberDao {
 				
 		
 		return count;
+	}
+	// 회원 탈퇴 -> 회원 정보를 DELETE
+	// 회원정보를 DELETE 시키면 그 회원과 관련된 기록된 모든 데이터들을 지워야하기 때문에
+	// 작업량이 많아지고 그 회원의 정보를 잃어버리게 되므로 이용자 분석에 큰 손실이 생김
+	public void delete(String email) {	
+		String sql = "UPDATE member WHERE email =?";
+		
+		jdbcTemplate.update(sql,email);
 	}
 }

@@ -36,6 +36,11 @@ public class AppCtx {
 	}
 	
 	@Bean
+	public LogDao logDao() {
+		return new LogDao(dataSource());
+	}
+	
+	@Bean
 	public PlatformTransactionManager transactionManager() {
 		DataSourceTransactionManager tm = new DataSourceTransactionManager();
 		tm.setDataSource(dataSource());
@@ -48,5 +53,34 @@ public class AppCtx {
 		pwdSvc.setMemberDao(memberDao());
 		
 		return pwdSvc;
+	}
+	
+	@Bean
+	public MemberPrinter memberPrinter() {
+		return new MemberPrinter();
+	}
+	@Bean
+	public MemberRegisterService memberRegSvc() {
+		MemberRegisterService memberRegSvc = new MemberRegisterService(memberDao(), logDao());
+		
+		return memberRegSvc;
+	}
+	
+	@Bean
+	public MemberListPrinter listPrinter() {
+		MemberListPrinter listPrinter = new MemberListPrinter();
+		listPrinter.setMemberDao(memberDao());
+		listPrinter.setMemberPrinter(memberPrinter());
+		
+		return listPrinter;
+	}
+	
+	
+	@Bean
+	public MemberInfoPrinter infoPrinter() {
+		MemberInfoPrinter infoPrinter = new MemberInfoPrinter();
+		infoPrinter.setPrinter(memberPrinter());
+		infoPrinter.setMemberDao(memberDao());
+		return infoPrinter;
 	}
 }

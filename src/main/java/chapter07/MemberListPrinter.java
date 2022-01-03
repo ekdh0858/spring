@@ -27,6 +27,10 @@ public class MemberListPrinter {
 	public void setPrinter(MemberPrinter printer) {
 		this.printer = printer;
 	}
+	
+	public void setMemberPrinter(MemberPrinter printer) {
+		this.printer = printer;
+	}
 
 
 	public void printAll() {

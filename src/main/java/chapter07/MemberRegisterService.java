@@ -2,12 +2,19 @@ package chapter07;
 
 import java.time.LocalDateTime;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 public class MemberRegisterService {
 	private MemberDao memberDao;
+	private LogDao logDao;
 	
+	public MemberRegisterService(MemberDao memberDao, LogDao logDao) {
+		this.memberDao=memberDao;
+		this.logDao=logDao;
+	}
+	
+	@Transactional
+	// SELECT 쿼리는 DB내 데이터에  직접 영향을 주는 쿼리가 아님
 	public long regist(RegisterRequest request) throws DuplicateMemberException{
 		//가입하려는 사용자의 이메일로 회원 정보를 조회
 		Member member = memberDao.selectByEmail(request.getEmail());
@@ -23,8 +30,29 @@ public class MemberRegisterService {
 				LocalDateTime.now()
 				);
 		
-		memberDao.insert(newMember);
+		long newMemberId = memberDao.insert(newMember);
 		
-		return newMember.getId();
+		System.out.println("멈춤");
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("시작");
+		
+		logDao.insertLog(newMemberId,1,"회원가입");
+		
+		return newMemberId;
+	}
+
+	public void delete(String email) throws WrongIdPasswordException{
+		Member member = memberDao.selectByEmail(email);
+		if(member == null) {
+			throw new WrongIdPasswordException();
+		}
+		memberDao.delete(email);		
+		
+		logDao.insertLog(member.getId(),2,"회원탈퇴");
+		
 	}
 }
