@@ -8,7 +8,12 @@
     <groupId>sp5</groupId>
     <artifactId>sp5</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-
+    <packaging>war</packaging>
+	
+	
+	
+	
+	
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -55,6 +60,31 @@
 		    <artifactId>logback-classic</artifactId>
 		    <version>1.2.10</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>1.2</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>4.0.1</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
+	<dependency>
+	    <groupId>javax.servlet.jsp</groupId>
+	    <artifactId>javax.servlet.jsp-api</artifactId>
+	    <version>2.3.3</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+	    <version>5.0.2.RELEASE</version>
+	</dependency>
 		        
     </dependencies>
 
