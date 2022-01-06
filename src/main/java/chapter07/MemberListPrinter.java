@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import chapter10.Member;
+import chapter10.MemberDao;
+
 public class MemberListPrinter {
 	private MemberDao memberDao;
 	private MemberPrinter printer;

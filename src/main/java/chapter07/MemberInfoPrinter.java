@@ -1,5 +1,8 @@
 package chapter07;
 
+import chapter10.Member;
+import chapter10.MemberDao;
+
 public class MemberInfoPrinter {
 	private MemberDao memberDao;
 	private MemberPrinter printer;

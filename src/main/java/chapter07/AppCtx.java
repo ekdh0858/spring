@@ -7,6 +7,10 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import chapter10.ChangePasswordService;
+import chapter10.MemberDao;
+import chapter10.MemberRegisterService;
+
 @Configuration
 @EnableTransactionManagement
 public class AppCtx {

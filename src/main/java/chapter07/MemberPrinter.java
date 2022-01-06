@@ -1,5 +1,7 @@
 package chapter07;
 
+import chapter10.Member;
+
 public class MemberPrinter {
 	
 	

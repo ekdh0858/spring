@@ -5,6 +5,13 @@ import java.util.Scanner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import chapter10.ChangePasswordService;
+import chapter10.DuplicateMemberException;
+import chapter10.MemberNotFoundException;
+import chapter10.MemberRegisterService;
+import chapter10.RegisterRequest;
+import chapter10.WrongIdPasswordException;
+
 
 public class Main3 {
 

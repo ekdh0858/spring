@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import chapter10.DuplicateMemberException;
+import chapter10.MemberRegisterService;
+import chapter10.RegisterRequest;
+import chapter10.WrongIdPasswordException;
+
 public class Main4 {
 
 	public static void main(String[] args) {

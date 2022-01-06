@@ -1,4 +1,4 @@
-package chapter07;
+package chapter10;
 
 public class WrongIdPasswordException extends RuntimeException{
 

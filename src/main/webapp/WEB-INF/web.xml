@@ -31,8 +31,9 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				chapter08.MvcConfig
-				chapter08.ControllerConfig
+				chapter10.MvcConfig
+				chapter10.ControllerConfig
+				chapter10.MemberConfig
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

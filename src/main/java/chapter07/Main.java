@@ -6,6 +6,9 @@ import java.util.Collection;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import chapter10.Member;
+import chapter10.MemberDao;
+
 public class Main {
 	private static MemberDao memberDao;
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMddHHmmss");

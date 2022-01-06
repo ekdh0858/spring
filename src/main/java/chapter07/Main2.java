@@ -2,6 +2,10 @@ package chapter07;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import chapter10.ChangePasswordService;
+import chapter10.MemberNotFoundException;
+import chapter10.WrongIdPasswordException;
+
 public class Main2 {
 
 	public static void main(String[] args) {

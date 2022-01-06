@@ -1,16 +1,16 @@
-package chapter07;
+package chapter10;
 
 import java.time.LocalDateTime;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import chapter07.LogDao;
+
 public class MemberRegisterService {
 	private MemberDao memberDao;
-	private LogDao logDao;
 	
-	public MemberRegisterService(MemberDao memberDao, LogDao logDao) {
+	public MemberRegisterService(MemberDao memberDao) {
 		this.memberDao=memberDao;
-		this.logDao=logDao;
 	}
 	
 	@Transactional
@@ -40,7 +40,6 @@ public class MemberRegisterService {
 		}
 		System.out.println("시작");
 		
-		logDao.insertLog(newMemberId,1,"회원가입");
 		
 		return newMemberId;
 	}
@@ -52,7 +51,6 @@ public class MemberRegisterService {
 		}
 		memberDao.delete(email);		
 		
-		logDao.insertLog(member.getId(),2,"회원탈퇴");
 		
 	}
 }
