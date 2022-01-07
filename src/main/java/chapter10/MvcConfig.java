@@ -1,9 +1,15 @@
 package chapter10;
 
+import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+@Configuration
+@EnableWebMvc
+@EnableTransactionManagement
 public class MvcConfig implements WebMvcConfigurer{
 
 	@Override
