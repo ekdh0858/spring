@@ -3,7 +3,9 @@ package chapter10;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,12 +39,20 @@ public class RegistController {
 	// 주의할 점! defaultValue는 문자열임! 
 	// 회원 정보 입력 화면 요청 처리
 	@PostMapping("/step2")
-	public String handleStep2(@RequestParam(value="agree", defaultValue = "false")boolean agree) {
+	public String handleStep2(
+			@RequestParam(value="agree", defaultValue = "false")boolean agree,
+			Model model) {
 		
 		if(!agree) {
 			// register/step1.jsp 뷰를 전달
 			return "register/step1";
 		}
+		
+		// step2 .jsp 뷰에서는 registerRequest 라는 이름의 커맨드 객체를 사용하는데
+		// 컨트롤러에서는 뷰로 그러한 이름의 커맨드 객체를 전달해주지 않고 있음
+		// 그래서 뷰에서 예외가 발생함
+		// 따라서 예외가 발생하지 않게 커맨드 객체를 전달해줘야함 -> 빈 커맨드 객체를 전달해줘야함
+		model.addAttribute("registerRequest",new RegisterRequest());
 		
 		return "register/step2";
 	}
@@ -68,9 +78,13 @@ public class RegistController {
 	// 그래서 스프링에서는 커맨드(Command) 객체를 제공
 	// 예를 들어 이름이 email인 요청 파라미터 값을 커맨드 객체에 저장하려면
 	// 커맨드 객체에 setEmail(세터)가 있기만 하면됨
+	
+	// 요청 처리 메서드에 커맨드 객체가 있다면 스프링은 스스로 뷰로 커맨드 객체를 전달함
+	// 그때 전달할 커맨드 객체의 이름은 커맨드 객체의 데이터 타입을 사용
+	// 커맨드 객체의 데이터 타입의 이름을 직접 지정하고 싶다면 @ModelAttribute 애노테이션을 사용하면 됨
 	@PostMapping("/step3")
+//	public String handleStep3(@ModelAttribute("formData") RegisterRequest regreq) {
 	public String handleStep3(RegisterRequest regreq) {
-		
 		// 클라이언트가 보낸 데이터를 꺼내서 
 		// 검증하는 과정은 생략하고 
 		// RequesterRequest 타입의 객체에 저장하세요
@@ -78,7 +92,12 @@ public class RegistController {
 			memberRegSvc.regist(regreq);
 			return "register/step3";
 		}catch(DuplicateMemberException e) {
-			return "return/step2";
+			// 회원가입 시 이미 존재하는 이메일을 사용해서 가입을 하면
+			// 곧바로 다시 회원 정보를 입력하는 뷰가 보임
+			// 그러나 회원 정보를 입력하는 뷰가 보일 때 빈 화면이 보임
+			// 사용자가 입력했던 이메일, 이름은 그대로 유지한채로 보여주고 싶다면
+			// 커맨드 객체를 활용하면 됨
+			return "register/step2";
 		}
 	}
 }

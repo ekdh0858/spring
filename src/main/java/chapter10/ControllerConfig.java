@@ -3,6 +3,7 @@ package chapter10;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 public class ControllerConfig {
@@ -36,5 +37,10 @@ public class ControllerConfig {
 	@Bean
 	public RegistController registController() {
 		return new RegistController(memberRegisterService());
+	}
+	
+	@Bean
+	public SurveyController surveyController() {
+		return new SurveyController();
 	}
 }
