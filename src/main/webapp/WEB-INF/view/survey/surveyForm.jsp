@@ -13,23 +13,20 @@
 		<c:forEach var="question" items="${questions }" varStatus="status">
 			<p>
 				${status.count }. ${question.title }<br>
-				<c:if test="${question.choice }">
+				<c:if test="${question.options }">
 					<c:forEach var="option" items=${question.options }>
 						<label>
-							<input type="radio" name="responses[${status.index }]" value=${option }>
+							<input type="radio" name="responses[${status.index }]" value="${option }">
 							${option}
 						</label>
 					</c:forEach>
 				</c:if>
-				<c:if test="${!question.choice }">
+				<c:if test="${!question.options }">
 					<input type="text">
 				</c:if>
 			
 			</p>
 		</c:forEach>
-		<p>3.하고 싶은 말<br>
-			<input type="text" name="responses[2]">
-		</p>
 		<p>
 		<label>
 				응답자의 지역 : <input type="text" name="res.location">
