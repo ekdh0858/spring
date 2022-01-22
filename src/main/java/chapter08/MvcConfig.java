@@ -32,7 +32,7 @@ public class MvcConfig implements WebMvcConfigurer{
 		// DefaultServlet과 관련된 설정
 		// DispatcherServlet의 매핑 경로를 / 로 주었을 떄, JSP/HTML/Css 등 웹 요소들을 올바르게 처리하기 위한 설정
 		// DispatcherServlet -> 스프링 Mvc가 웹 요청을 처리하려면 반드시 필요한 요소
-		// 스프링 MVC가 웹 요청을 처리할 때DispatcherServlet을 통해서 웹 요청을 받음
+		// 스프링 MVC가 웹 요청을 처리할 때DispatcherServlet을 통해서 웹 요청을 받음 
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
