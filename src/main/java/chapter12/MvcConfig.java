@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -55,6 +56,22 @@ public class MvcConfig implements WebMvcConfigurer{
 		return ms;
 	}
 
+	
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		// addPathPatterns 테스트 인자로 사용한 경로는 Ant하는 곳에서 사용하는 경로 패턴
+		registry.addInterceptor(authCheckInterceptor()).addPathPatterns("/edit/**","/logout")
+		.excludePathPatterns("/edit/help/**");
+		// 모든 /edit/**이러한 패턴을 갖는 요청이 들어오면 이 인터셉터(authCheckInterceptor)가 동작한다.
+		// excludePathPatterns을 사용해서 특정 경로의 요청에서는 적용을 안시킬수도 있음(특정 경로 제외)
+	}
+
+	@Bean
+	public AuthCheckInterceptor authCheckInterceptor() {
+		return new AuthCheckInterceptor();
+	}
+	
 //	@Override
 //	public Validator getValidator() {
 //		return new RegisterRequestValidator();
