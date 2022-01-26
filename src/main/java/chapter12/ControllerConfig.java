@@ -1,12 +1,17 @@
 package chapter12;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@EnableTransactionManagement
 public class ControllerConfig {
+	@Autowired
+	private ChangePasswordService changePwdSvc;
+	
 	@Bean(destroyMethod = "close")
 	public DataSource dataSource() {
 		DataSource ds = new DataSource();
@@ -19,6 +24,15 @@ public class ControllerConfig {
 		ds.setMaxActive(10);
 				
 		return ds;
+	}
+	
+	
+	
+	@Bean
+	public ChangePasswordService changePasswordService() {
+		ChangePasswordService cps = new ChangePasswordService();
+		cps.setMemberDao(memberDao());
+		return cps;
 	}
 	
 	
@@ -64,5 +78,13 @@ public class ControllerConfig {
 	@Bean
 	public LogOutController logOutController() {
 		return new LogOutController();
+	}
+	
+	@Bean
+	public ChangePwdController changePwdController() {
+		ChangePwdController cpc = new ChangePwdController();
+		cpc.setChangePasswordService(changePwdSvc);
+		
+		return cpc;
 	}
 }

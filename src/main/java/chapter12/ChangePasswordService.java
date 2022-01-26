@@ -23,7 +23,7 @@ public class ChangePasswordService {
 	// rollbackFor 속성을 추가하면 지정한 예외가 발생했을 때도 rollback이 이뤄지도록 할 수 있음
 	// norollbackFor 속성을 추가하면 지정한 예외가 발생했을 때는 rollback하지 않도록 함
 	@Transactional(rollbackFor = {SQLException.class,IOException.class}) 
-	public void ChangePasswordService(String email,String oldPW, String newPW) 
+	public void ChangePassword(String email,String oldPW, String newPW) 
 			throws MemberNotFoundException,WrongIdPasswordException{
 		Member member = memberDao.selectByEmail(email);
 		if(member == null) {
