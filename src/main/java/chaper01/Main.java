@@ -24,7 +24,7 @@ public class Main {
 		
 		// getBean 메서드는 AnnotationConfigApplicationContext가 자바 설정을 읽어와
 		// 빈 객체를 검색할 때 사용
-		// 첫 번째 인자 - @Bean 애노텡션이 달린 메서드의 이름
+		// 첫 번째 인자 - @Bean 애노테이션이 달린 메서드의 이름
 		// 두 번째 인자 - 검색할 빈 객체의 타입
 		Greeter g = ctx.getBean("greeter",Greeter.class);
 		
