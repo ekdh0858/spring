@@ -1,4 +1,4 @@
-package chapter12;
+package chapter13;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
