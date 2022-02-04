@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 // 1.회원들의 이메일은 중복되면 안된다.
 // 2.
 public class MemberRegisterService {
-	private MemberDao memberDao;
+	private MemberDao memberDao = new MemberDao();
 	
 	public MemberRegisterService(MemberDao memberDao) {
 		this.memberDao=memberDao;
