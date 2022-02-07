@@ -26,7 +26,7 @@ public class MemberDetailController {
 		
 		return "list/memberDetail";
 	}
-	
+	// commonExceptionhandler를 사용하면서 중첩이 됨.
 	@ExceptionHandler(MemberNotFoundException.class)
 	public String handleMemberNotFoundException() {
 		return "list/noMember";
