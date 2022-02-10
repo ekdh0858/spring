@@ -18,7 +18,8 @@ public class Member {
 	@JsonIgnore
 	private String password;
 	private String name;
-	@JsonFormat(pattern="yyyy,MM,dd,HH,mm,ss")
+//	@JsonFormat(pattern="yyyy,MM,dd,HH,mm,ss") -> LocalDateTime이라는 데이터 타입자체에 제이슨화 형식을 지정해주기 위해서 MvcConfig에서 
+	// 코드를 작성해줄때 주석처리함.
 	private LocalDateTime resisterDateTime;
 	
 	public Member(String email, String password, String name, LocalDateTime resisterDateTime) {

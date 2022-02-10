@@ -1,8 +1,10 @@
 package chapter15;
 
-import javax.validation.constraints.Email;
+
+
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 // 회원가입을 처리할 때 필요한 이메일, 암호, 이름 데이터를 담고 있을 DTO
