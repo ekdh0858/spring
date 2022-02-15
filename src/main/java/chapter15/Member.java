@@ -20,6 +20,9 @@ public class Member {
 	private String name;
 //	@JsonFormat(pattern="yyyy,MM,dd,HH,mm,ss") -> LocalDateTime이라는 데이터 타입자체에 제이슨화 형식을 지정해주기 위해서 MvcConfig에서 
 	// 코드를 작성해줄때 주석처리함.
+	// 클라이언트가 ISO-8601 형식의 문자열을 보내면 서버가 알아서 LocalDatetime 객체로 반환해준다.
+	// 클라이언트가 특정 패턴의 날짜 문자열을 보냈을 때 LocalDatetime 객체로 변환하고 싶다면 
+	//@jsonFormatter 애노테이션을 사용해서 패턴을 지정하면 된다.
 	private LocalDateTime resisterDateTime;
 	
 	public Member(String email, String password, String name, LocalDateTime resisterDateTime) {

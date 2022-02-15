@@ -12,7 +12,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.validation.Validator;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -21,7 +20,7 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 @Configuration
@@ -77,7 +76,8 @@ public class MvcConfig implements WebMvcConfigurer{
 				.json()
 //				.featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
 				// 날짜를 타임스탬프 형식으로 출력되는 데이터를 Disable하라는 속성을 추가해줌. -> 차선책으로 ISO-8601이라는 형태로 변환 해줌
-				.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(dft))
+				.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(dft))// -> 보낼때
+				.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer(dft)) // -> 받을 때 
 				// LocalDateTime 형식을 우리가 지정한 여형식으로 변환하고 싶을 때 사용함. 위에는 차선책을 쓰고지금은 우리가 원하는 방식으로 변환(dft형식)
 				.build();
 		// MappingJackson2HttpMessageConverter객체를 새롭게 재정의 한것을 스프링이 사용하도록 하려면
